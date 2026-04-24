@@ -21,8 +21,7 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
 
     if (!apiKey) {
-      // Fallback: return original text when API key not configured
-      return NextResponse.json({ translatedText: sanitizedText });
+      return NextResponse.json({ error: 'Translation service is temporarily unavailable (Missing API Key).' }, { status: 503 });
     }
 
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
@@ -38,7 +37,8 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
-      throw new Error(`Translation API returned ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Translation API returned ${response.status}: ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();

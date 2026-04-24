@@ -11,7 +11,8 @@
   transition: background var(--transition-fast);
   font-size: var(--text-sm);
 }
-.checkItem:hover { background: var(--bg-secondary); }
+.checkItem:hover { background: rgba(255, 255, 255, 0.2); }
+[data-theme="dark"] .checkItem:hover { background: rgba(0, 0, 0, 0.2); }
 .checked { text-decoration: line-through; color: var(--text-tertiary); }
 .checkbox {
   width: 20px; height: 20px; flex-shrink: 0;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import styles from './VoterReadinessPage.module.css';
 
 interface Step {
@@ -106,8 +107,8 @@ export function VoterReadinessPage() {
             </div>
           </div>
           <div className={styles.resultActions}>
-            <a href="/timeline" className="btn btn-primary btn-lg">📋 Learn the Process</a>
-            <a href="/quiz" className="btn btn-secondary btn-lg">🧠 Take the Quiz</a>
+            <Link href="/timeline" className="btn btn-primary btn-lg">📋 Learn the Process</Link>
+            <Link href="/quiz" className="btn btn-secondary btn-lg">🧠 Take the Quiz</Link>
             <button className="btn btn-ghost" onClick={restart}>↩ Start Over</button>
           </div>
         </div>

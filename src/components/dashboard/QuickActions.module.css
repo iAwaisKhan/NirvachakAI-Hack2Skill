@@ -7,16 +7,21 @@
 .action {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-3);
-  border: 1px solid var(--border-default);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(4px);
   border-radius: var(--radius-lg);
   text-decoration: none; color: inherit;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
+}
+[data-theme="dark"] .action {
+  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 .action:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-secondary);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  border-color: rgba(249, 115, 22, 0.4);
+  background: var(--bg-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.1);
 }
 .actionIcon {
   width: 40px; height: 40px; flex-shrink: 0;

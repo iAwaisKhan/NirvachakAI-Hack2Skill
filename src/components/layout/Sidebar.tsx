@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import styles from './Sidebar.module.css';
 
@@ -18,7 +17,6 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   const { theme, toggleTheme } = useTheme();
-  const { user, signInWithGoogle, signOut } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
 
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -79,26 +77,6 @@ export function Sidebar() {
               {!collapsed && <span>Dark Mode</span>}
             </button>
             {!collapsed && <LanguageSwitcher />}
-          </div>
-
-          {/* User */}
-          <div className={styles.userSection}>
-            {user ? (
-              <button className={styles.userBtn} onClick={signOut}>
-                <img src={user.photoURL || ''} alt="" className={styles.avatar} width={32} height={32} />
-                {!collapsed && (
-                  <div className={styles.userInfo}>
-                    <span className={styles.userName}>{user.displayName}</span>
-                    <span className={styles.userEmail}>{user.email?.split('@')[0]}</span>
-                  </div>
-                )}
-              </button>
-            ) : (
-              <button className={styles.signInBtn} onClick={signInWithGoogle}>
-                <span>🔐</span>
-                {!collapsed && <span>Sign in with Google</span>}
-              </button>
-            )}
           </div>
         </div>
       </aside>

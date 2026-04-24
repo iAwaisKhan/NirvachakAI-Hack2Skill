@@ -32,9 +32,7 @@ export function TTSButton({ text, label = 'Listen' }: TTSButtonProps) {
       });
 
       if (!response.ok) {
-        // Fallback to browser TTS
-        useBrowserTTS(text);
-        return;
+        throw new Error(`TTS API failed: ${response.status}`);
       }
 
       const data = await response.json();
@@ -42,12 +40,18 @@ export function TTSButton({ text, label = 'Listen' }: TTSButtonProps) {
         const audio = new Audio(`data:audio/mp3;base64,${data.audioContent}`);
         audioRef.current = audio;
         audio.onended = () => setIsPlaying(false);
-        await audio.play();
-        setIsPlaying(true);
+        try {
+          await audio.play();
+          setIsPlaying(true);
+        } catch (audioError) {
+          console.error("Audio playback failed:", audioError);
+          useBrowserTTS(text);
+        }
       } else {
         useBrowserTTS(text);
       }
-    } catch {
+    } catch (error) {
+      console.error("TTS fetch error:", error);
       useBrowserTTS(text);
     } finally {
       setIsLoading(false);

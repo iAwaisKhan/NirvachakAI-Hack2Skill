@@ -17,7 +17,7 @@ export function QuickActions() {
       <div className="widget-header">
         <span className="widget-title">⚡ Quick Actions</span>
       </div>
-      <div className={styles.grid}>
+      <div className="widget-grid widget-grid-2">
         {ACTIONS.map((action) => (
           <a key={action.href} href={action.href} className={styles.action}>
             <div className={styles.actionIcon} style={{ background: `${action.color}15`, color: action.color }}>

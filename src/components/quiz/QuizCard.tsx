@@ -37,9 +37,15 @@ export function QuizCard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ difficulty }),
       });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to generate quiz: ${response.statusText}`);
+      }
+      
       const data = await response.json();
       setQuestions(data.questions || []);
-    } catch {
+    } catch (error) {
+      console.error(error);
       setQuestions([]);
     } finally {
       setIsLoading(false);
@@ -111,19 +117,81 @@ export function QuizCard() {
     );
   }
 
-  if (questions.length === 0) {
+  if (hasStarted && questions.length === 0 && !isLoading) {
     return (
       <div className={styles.container}>
         <div className={styles.startCard}>
-          <p>Could not generate quiz. Please check your API configuration.</p>
-          <button className="btn btn-primary" onClick={() => setHasStarted(false)}>Try Again</button>
+          <span className={styles.quizEmoji}>🚫</span>
+          <h3 className={styles.startTitle}>Connection Error</h3>
+          <p className={styles.startDesc}>
+            Could not generate the quiz. The API may be unavailable or rate-limited.
+          </p>
+          <button className="btn btn-primary" onClick={() => setHasStarted(false)}>
+            Try Again
+          </button>
         </div>
       </div>
     );
   }
 
-  // Results
-  if (isFinished) {
+  // Question Card (only render if questions are present)
+  if (hasStarted && questions.length > 0 && !isFinished) {
+    const currentQuestion = questions[currentIndex];
+    return (
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.progress}>
+            Question {currentIndex + 1} of {questions.length}
+          </div>
+          <div className={styles.score}>Score: {score}</div>
+        </div>
+
+        <div className={styles.questionCard}>
+          <h2 className={styles.question}>{currentQuestion.question}</h2>
+          <div className={styles.options}>
+            {currentQuestion.options.map((option, index) => {
+              const isSelected = selectedAnswer === index;
+              const isCorrect = currentQuestion.correctAnswer === index;
+              const showResult = selectedAnswer !== null;
+
+              let btnClass = styles.optionBtn;
+              if (showResult) {
+                if (isCorrect) btnClass += ` ${styles.correct}`;
+                else if (isSelected) btnClass += ` ${styles.incorrect}`;
+              }
+
+              return (
+                <button
+                  key={index}
+                  className={btnClass}
+                  onClick={() => handleAnswer(index)}
+                  disabled={showResult}
+                  aria-pressed={isSelected}
+                >
+                  <span className={styles.optionLetter}>{String.fromCharCode(65 + index)}. </span>
+                  {option}
+                </button>
+              );
+            })}
+          </div>
+
+          {showExplanation && (
+            <div className={styles.explanation}>
+              <p>
+                {selectedAnswer === currentQuestion.correctAnswer ? '✅ Correct! ' : '❌ Incorrect. '}
+                {currentQuestion.explanation}
+              </p>
+              <button className={`btn btn-primary ${styles.nextBtn}`} onClick={handleNext}>
+                {currentIndex + 1 >= questions.length ? 'See Results' : 'Next Question ➔'}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (isFinished && questions.length > 0) {
     const percentage = Math.round((score / questions.length) * 100);
     return (
       <div className={styles.container}>

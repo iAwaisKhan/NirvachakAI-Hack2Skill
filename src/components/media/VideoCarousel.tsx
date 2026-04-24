@@ -75,7 +75,7 @@ export function VideoCarousel() {
               >
                 <div className={styles.thumbnail}>
                   {video.thumbnailUrl ? (
-                    <img src={video.thumbnailUrl} alt="" loading="lazy" />
+                    <img src={video.thumbnailUrl} alt={video.title} loading="lazy" />
                   ) : (
                     <div className={styles.placeholderThumb}>🎬</div>
                   )}

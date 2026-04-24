@@ -34,25 +34,32 @@ export function PhaseTracker() {
 
       {/* Phase detail */}
       <div className={styles.detail} role="tabpanel">
-        <div className={styles.detailHeader}>
-          <h3 className={styles.detailTitle}>{phase.title}</h3>
-          <span className="badge badge-primary">{phase.duration}</span>
-        </div>
-        <p className={styles.detailDesc}>{phase.description}</p>
-
-        <div className={styles.steps}>
-          {phase.steps.map((step, i) => (
-            <div key={step.id} className={styles.step}>
-              <div className={styles.stepDot} style={{ background: phase.color }} />
-              <div>
-                <strong className={styles.stepTitle}>{step.title}</strong>
-                <p className={styles.stepDesc}>{step.description}</p>
-                {step.keyFact && (
-                  <span className={styles.keyFact}>💡 {step.keyFact}</span>
-                )}
-              </div>
+        <div className={styles.detailCard}>
+          <div className={styles.detailHeader}>
+            <div>
+              <h3 className={styles.detailTitle}>{phase.title}</h3>
+              <p className={styles.detailDesc}>{phase.description}</p>
             </div>
-          ))}
+            <span className="badge badge-primary">{phase.duration}</span>
+          </div>
+
+          <div className={styles.steps}>
+            {phase.steps.map((step, i) => (
+              <div key={step.id} className={styles.step}>
+                <div className={styles.stepIndicator}>
+                  <div className={styles.stepDot} style={{ background: phase.color }} />
+                  {i !== phase.steps.length - 1 && <div className={styles.stepLine} />}
+                </div>
+                <div className={styles.stepContent}>
+                  <strong className={styles.stepTitle}>{step.title}</strong>
+                  <p className={styles.stepDesc}>{step.description}</p>
+                  {step.keyFact && (
+                    <span className={styles.keyFact}>💡 {step.keyFact}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

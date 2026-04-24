@@ -1,11 +1,18 @@
 .row { margin-bottom: var(--space-6); }
 .statWidget { animation: fadeInUp 0.5s ease-out both; }
-.statTop { display: flex; justify-content: space-between; align-items: flex-start; }
+.statContent { display: flex; justify-content: space-between; align-items: flex-start; }
+.statInfo { display: flex; flex-direction: column; gap: var(--space-1); }
 .iconBox {
-  width: 48px; height: 48px;
+  width: 52px; height: 52px;
   border-radius: var(--radius-lg);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: white;
   flex-shrink: 0;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.statWidget:hover .iconBox {
+  transform: scale(1.1);
+  transition: transform var(--transition-base);
 }

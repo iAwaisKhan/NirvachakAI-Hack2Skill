@@ -64,7 +64,9 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    return NextResponse.json({ videos });
+    const res = NextResponse.json({ videos });
+    res.headers.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+    return res;
   } catch (error) {
     console.error('YouTube API error:', error);
     return NextResponse.json({ videos: getFallbackVideos() });
@@ -74,26 +76,26 @@ export async function GET(request: NextRequest) {
 function getFallbackVideos(): YouTubeVideo[] {
   return [
     {
-      id: 'dQw4w9WgXcQ',
+      id: 'b8m9ZhNAgO4',
       title: 'How Indian Elections Work — Complete Guide',
       description: 'A comprehensive guide to the Indian election process from voter registration to results.',
-      thumbnailUrl: '',
+      thumbnailUrl: 'https://i.ytimg.com/vi/b8m9ZhNAgO4/hqdefault.jpg',
       channelTitle: 'ECI India',
       publishedAt: '2024-01-15T00:00:00Z',
     },
     {
-      id: 'dQw4w9WgXcQ',
+      id: 'gM2A-E-cXYQ',
       title: 'Understanding EVMs and VVPAT',
       description: 'Learn how Electronic Voting Machines and Voter Verifiable Paper Audit Trail work.',
-      thumbnailUrl: '',
+      thumbnailUrl: 'https://i.ytimg.com/vi/gM2A-E-cXYQ/hqdefault.jpg',
       channelTitle: 'Election Commission of India',
       publishedAt: '2024-02-20T00:00:00Z',
     },
     {
-      id: 'dQw4w9WgXcQ',
+      id: 'M15E4L0L0B4',
       title: 'Your Right to Vote — A Citizens Guide',
       description: 'Everything you need to know about exercising your democratic right.',
-      thumbnailUrl: '',
+      thumbnailUrl: 'https://i.ytimg.com/vi/M15E4L0L0B4/hqdefault.jpg',
       channelTitle: 'Lok Sabha TV',
       publishedAt: '2024-03-10T00:00:00Z',
     },

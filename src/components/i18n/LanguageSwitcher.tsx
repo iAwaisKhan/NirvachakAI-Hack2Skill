@@ -1,13 +1,18 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLanguage, SUPPORTED_LANGUAGES, type Language } from '@/contexts/LanguageContext';
 import styles from './LanguageSwitcher.module.css';
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSelect = (lang: Language) => {
     setLanguage(lang);
@@ -19,6 +24,16 @@ export function LanguageSwitcher() {
       setIsOpen(false);
     }
   };
+
+  if (!mounted) {
+    return (
+      <div className={styles.container}>
+        <button className={`btn btn-ghost btn-sm ${styles.trigger}`}>
+          🌐 ...
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container} ref={containerRef} onBlur={handleBlur}>

@@ -2,22 +2,12 @@
 
 import { useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import styles from './Header.module.css';
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
-  const { user, signInWithGoogle, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleAuthAction = useCallback(async () => {
-    if (user) {
-      await signOut();
-    } else {
-      await signInWithGoogle();
-    }
-  }, [user, signInWithGoogle, signOut]);
 
   return (
     <header className={styles.header} role="banner">
@@ -51,27 +41,6 @@ export function Header() {
             title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
             {theme === 'light' ? '🌙' : '☀️'}
-          </button>
-
-          <button
-            className={`btn ${user ? 'btn-ghost' : 'btn-primary'} btn-sm`}
-            onClick={handleAuthAction}
-            aria-label={user ? 'Sign out' : 'Sign in with Google'}
-          >
-            {user ? (
-              <>
-                <img
-                  src={user.photoURL || ''}
-                  alt=""
-                  className={styles.avatar}
-                  width={24}
-                  height={24}
-                />
-                <span className={styles.userName}>{user.displayName?.split(' ')[0]}</span>
-              </>
-            ) : (
-              '🔐 Sign In'
-            )}
           </button>
 
           <button

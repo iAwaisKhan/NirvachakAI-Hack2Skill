@@ -59,6 +59,10 @@ export function ChatPanel() {
 
       const data = await response.json();
 
+      if (!response.ok || data.error) {
+        throw new Error(data.error || 'Failed to get response');
+      }
+
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',

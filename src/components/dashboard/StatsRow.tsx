@@ -15,11 +15,13 @@ export function StatsRow() {
     <div className={`widget-grid widget-grid-4 ${styles.row}`}>
       {stats.map((stat, i) => (
         <div key={stat.label} className={`widget ${styles.statWidget}`} style={{ animationDelay: `${i * 0.1}s` }}>
-          <div className={styles.statTop}>
-            <div>
-              <p className="widget-title">{stat.label}</p>
+          <div className={styles.statContent}>
+            <div className={styles.statInfo}>
+              <p className="stat-label">{stat.label}</p>
               <p className="stat-value">{stat.value}</p>
-              <span className="stat-change stat-neutral">{stat.change}</span>
+              <span className={`stat-change ${i === 0 ? 'stat-positive' : 'stat-neutral'}`}>
+                {i === 0 ? '↑ ' : ''}{stat.change}
+              </span>
             </div>
             <div className={styles.iconBox} style={{ background: stat.bg }}>
               {stat.icon}
