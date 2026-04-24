@@ -1,0 +1,62 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  font-size: var(--text-sm);
+  gap: var(--space-1);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2);
+  list-style: none;
+  z-index: var(--z-dropdown);
+  animation: fadeIn 0.15s ease-out;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  transition: background var(--transition-fast);
+}
+.option:hover {
+  background: var(--bg-tertiary);
+}
+
+.active {
+  background: var(--saffron-50);
+  color: var(--saffron-700);
+  font-weight: 600;
+}
+[data-theme="dark"] .active {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--saffron-300);
+}
+
+.langName {
+  font-weight: 500;
+}
+.nativeName {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}

@@ -1,0 +1,168 @@
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.startCard, .loadingCard, .resultCard, .questionCard {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.quizEmoji, .resultEmoji { font-size: 3rem; display: block; margin-bottom: var(--space-4); }
+
+.startTitle, .resultTitle {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin: 0 0 var(--space-3);
+}
+.startDesc {
+  max-width: 400px;
+  margin: 0 auto var(--space-6);
+}
+
+.difficultySelect {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+.diffBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--bg-secondary);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.diffBtn:hover { border-color: var(--saffron-400); }
+.diffActive {
+  border-color: var(--saffron-500);
+  background: var(--saffron-50);
+  color: var(--saffron-700);
+  font-weight: 600;
+}
+[data-theme="dark"] .diffActive {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--saffron-300);
+}
+
+.loadingCard { padding: var(--space-16); }
+.loadingCard p { margin-top: var(--space-4); }
+
+/* Question */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--saffron-500), var(--green-500));
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+.progressText {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.questionText {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-align: left;
+  margin: 0 0 var(--space-5);
+  line-height: var(--leading-relaxed);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.option {
+  display: block;
+  width: 100%;
+  padding: var(--space-4);
+  text-align: left;
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.option:hover:not(:disabled) {
+  border-color: var(--saffron-400);
+  background: var(--saffron-50);
+}
+.correct {
+  border-color: var(--green-500) !important;
+  background: var(--green-50) !important;
+  color: var(--green-700) !important;
+}
+.incorrect {
+  border-color: var(--color-error) !important;
+  background: #fef2f2 !important;
+  color: #b91c1c !important;
+}
+[data-theme="dark"] .correct {
+  background: rgba(34, 197, 94, 0.1) !important;
+  color: var(--green-300) !important;
+}
+[data-theme="dark"] .incorrect {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #fca5a5 !important;
+}
+
+.explanation {
+  text-align: left;
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  animation: fadeIn 0.3s ease-out;
+}
+.explanation p { margin: var(--space-2) 0 0; }
+
+/* Results */
+.scoreCircle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  border: 4px solid var(--saffron-500);
+  margin: var(--space-6) auto;
+}
+.scoreValue { font-size: var(--text-2xl); font-weight: 700; }
+.scorePercent { font-size: var(--text-sm); color: var(--text-secondary); }
+.resultMsg { margin: 0 0 var(--space-6); }
+.resultActions { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
