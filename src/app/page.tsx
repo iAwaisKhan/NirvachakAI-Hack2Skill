@@ -1,138 +1,63 @@
-import { ELECTION_FACTS, ELECTION_PHASES } from '@/data/electionSteps';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { ELECTION_PHASES, ELECTION_FACTS } from '@/data/electionSteps';
 import { ChatPanel } from '@/components/chat/ChatPanel';
+import { VoterReadinessWidget } from '@/components/dashboard/VoterReadinessWidget';
+import { ElectionCountdown } from '@/components/dashboard/ElectionCountdown';
+import { PhaseTracker } from '@/components/dashboard/PhaseTracker';
+import { QuickActions } from '@/components/dashboard/QuickActions';
+import { StatsRow } from '@/components/dashboard/StatsRow';
+import { RecentActivity } from '@/components/dashboard/RecentActivity';
+import { GoogleServicesWidget } from '@/components/dashboard/GoogleServicesWidget';
 import styles from './page.module.css';
 
-export default function HomePage() {
+export default function DashboardPage() {
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) setGreeting('Good Morning');
+    else if (hour < 17) setGreeting('Good Afternoon');
+    else setGreeting('Good Evening');
+  }, []);
+
   return (
-    <div className={styles.page}>
-      {/* Hero */}
-      <section className={styles.hero} aria-labelledby="hero-title">
-        <div className={`container ${styles.heroContent}`}>
-          <span className={styles.heroBadge}>🇮🇳 Powered by 10 Google Services</span>
-          <h1 id="hero-title" className={styles.heroTitle}>
-            Understand India&apos;s <span className="text-gradient">Election Process</span>
-          </h1>
-          <p className={styles.heroDesc}>
-            Your interactive AI guide to how the world&apos;s largest democracy
-            works — from voter registration to government formation.
-          </p>
-          <div className={styles.heroCta}>
-            <a href="/timeline" className="btn btn-primary btn-lg">
-              📋 Explore Timeline
-            </a>
-            <a href="/quiz" className="btn btn-secondary btn-lg">
-              🧠 Take the Quiz
-            </a>
-          </div>
+    <div className={styles.dashboard}>
+      {/* Page Header */}
+      <div className="page-header">
+        <div className="page-breadcrumb">
+          <span>🏠 Home</span> <span>/</span> <span>Dashboard</span>
         </div>
-        <div className={styles.heroGlow} aria-hidden="true" />
-      </section>
+        <h1>{greeting} 🙏</h1>
+        <p>Your AI-powered command center for understanding India&apos;s election process.</p>
+      </div>
 
-      {/* Stats */}
-      <section className={styles.stats} aria-label="Election key facts">
-        <div className="container">
-          <div className={styles.statsGrid}>
-            {ELECTION_FACTS.map((fact) => (
-              <div key={fact.label} className={styles.statCard}>
-                <span className={styles.statIcon}>{fact.icon}</span>
-                <span className={styles.statValue}>{fact.value}</span>
-                <span className={styles.statLabel}>{fact.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Row */}
+      <StatsRow />
 
-      {/* Features */}
-      <section className={styles.features} aria-labelledby="features-title">
-        <div className="container">
-          <h2 id="features-title" className={styles.sectionTitle}>
-            Everything You Need to Know
-          </h2>
-          <p className={styles.sectionDesc}>
-            Interactive tools to understand every step of the Indian election journey.
-          </p>
-          <div className={styles.featureGrid}>
-            <a href="/timeline" className={`card card-interactive ${styles.featureCard}`}>
-              <span className={styles.featureIcon}>📋</span>
-              <h3>Interactive Timeline</h3>
-              <p>Walk through all 6 phases of the election process with detailed sub-steps and key facts.</p>
-            </a>
-            <a href="/quiz" className={`card card-interactive ${styles.featureCard}`}>
-              <span className={styles.featureIcon}>🧠</span>
-              <h3>AI-Powered Quiz</h3>
-              <p>Test your knowledge with dynamically generated questions powered by Google Gemini.</p>
-            </a>
-            <a href="/map" className={`card card-interactive ${styles.featureCard}`}>
-              <span className={styles.featureIcon}>🗺️</span>
-              <h3>Constituency Map</h3>
-              <p>Explore India&apos;s 543 constituencies on an interactive Google Maps view.</p>
-            </a>
-            <a href="/learn" className={`card card-interactive ${styles.featureCard}`}>
-              <span className={styles.featureIcon}>🎬</span>
-              <h3>Video Library</h3>
-              <p>Watch curated educational videos from official election channels via YouTube API.</p>
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* Main Grid */}
+      <div className={`widget-grid widget-grid-2-1 ${styles.mainGrid}`}>
+        {/* Left: Phase Tracker */}
+        <PhaseTracker />
 
-      {/* Quick Process Overview */}
-      <section className={styles.overview} aria-labelledby="overview-title">
-        <div className="container">
-          <h2 id="overview-title" className={styles.sectionTitle}>
-            The 6 Phases of an Indian Election
-          </h2>
-          <div className={styles.phaseCards}>
-            {ELECTION_PHASES.map((phase) => (
-              <div key={phase.id} className={styles.miniPhase}>
-                <span className={styles.miniIcon}>{phase.icon}</span>
-                <span className={styles.miniNum}>Phase {phase.phase}</span>
-                <h4 className={styles.miniTitle}>{phase.title}</h4>
-                <p className={styles.miniDesc}>{phase.subtitle}</p>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
-            <a href="/timeline" className="btn btn-primary btn-lg">
-              View Full Timeline →
-            </a>
-          </div>
+        {/* Right: Countdown + Readiness */}
+        <div className={styles.rightCol}>
+          <ElectionCountdown />
+          <VoterReadinessWidget />
         </div>
-      </section>
+      </div>
+
+      {/* Second Row */}
+      <div className={`widget-grid widget-grid-2 ${styles.secondGrid}`}>
+        <QuickActions />
+        <RecentActivity />
+      </div>
 
       {/* Google Services */}
-      <section className={styles.services} aria-labelledby="services-title">
-        <div className="container">
-          <h2 id="services-title" className={styles.sectionTitle}>
-            Powered by 10 Google Services
-          </h2>
-          <div className={styles.serviceGrid}>
-            {[
-              { name: 'Gemini API', desc: 'AI Chat & Quiz', num: 1 },
-              { name: 'Firebase Auth', desc: 'User Login', num: 2 },
-              { name: 'Firestore', desc: 'Data Storage', num: 3 },
-              { name: 'Google Maps', desc: 'Constituency Map', num: 4 },
-              { name: 'Cloud Translation', desc: '10+ Languages', num: 5 },
-              { name: 'Text-to-Speech', desc: 'Audio Narration', num: 6 },
-              { name: 'Google Fonts', desc: 'Typography', num: 7 },
-              { name: 'reCAPTCHA v3', desc: 'Bot Protection', num: 8 },
-              { name: 'YouTube API', desc: 'Video Content', num: 9 },
-              { name: 'Google OAuth', desc: 'Sign In', num: 10 },
-            ].map((s) => (
-              <div key={s.num} className={styles.serviceItem}>
-                <span className={styles.serviceNum}>{s.num}</span>
-                <div>
-                  <strong>{s.name}</strong>
-                  <span className={styles.serviceDesc}>{s.desc}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <GoogleServicesWidget />
 
-      {/* Chat Panel */}
+      {/* Chat */}
       <ChatPanel />
     </div>
   );

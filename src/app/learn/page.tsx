@@ -9,31 +9,29 @@ export const metadata: Metadata = {
 
 export default function LearnPage() {
   return (
-    <div className="container" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-16)' }}>
-      <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
-        <h1 style={{ marginBottom: 'var(--space-3)' }}>
-          🎬 Learn About Elections
-        </h1>
-        <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: 'var(--text-lg)' }}>
-          Curated educational videos from trusted sources via YouTube Data API.
-        </p>
+    <>
+      <div className="page-header">
+        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Learn</span></div>
+        <h1>🎬 Learn About Elections</h1>
+        <p>Curated educational videos and trusted resources via YouTube Data API.</p>
       </div>
 
-      <section aria-labelledby="videos-heading" style={{ marginBottom: 'var(--space-16)' }}>
-        <h2 id="videos-heading" style={{ marginBottom: 'var(--space-6)' }}>📺 Educational Videos</h2>
+      <section aria-labelledby="videos-heading" style={{ marginBottom: 'var(--space-8)' }}>
+        <h2 id="videos-heading" style={{ marginBottom: 'var(--space-6)', fontSize: 'var(--text-xl)' }}>📺 Educational Videos</h2>
         <VideoCarousel />
       </section>
 
       <section aria-labelledby="resources-heading">
-        <h2 id="resources-heading" style={{ marginBottom: 'var(--space-6)' }}>📚 Useful Resources</h2>
-        <div className="grid-auto">
+        <h2 id="resources-heading" style={{ marginBottom: 'var(--space-6)', fontSize: 'var(--text-xl)' }}>📚 Useful Resources</h2>
+        <div className="widget-grid widget-grid-2">
           {[
-            { title: 'Election Commission of India', url: 'https://eci.gov.in', desc: 'Official ECI website — election schedules, results, and voter services.' },
-            { title: 'National Voters Service Portal', url: 'https://voters.eci.gov.in', desc: 'Register as a voter, check your registration status, and find your polling station.' },
-            { title: 'Know Your Candidate', url: 'https://affidavit.eci.gov.in', desc: 'View candidate affidavits — criminal records, assets, and educational qualifications.' },
-            { title: 'Voter Helpline App', url: 'https://play.google.com/store/apps/details?id=com.eci.citizen', desc: 'Official ECI app for voter services, available on Google Play.' },
+            { title: 'Election Commission of India', url: 'https://eci.gov.in', desc: 'Official ECI website — schedules, results, and voter services.', icon: '🏛️' },
+            { title: 'National Voters Service Portal', url: 'https://voters.eci.gov.in', desc: 'Register, check status, and find your polling station.', icon: '📋' },
+            { title: 'Know Your Candidate', url: 'https://affidavit.eci.gov.in', desc: 'View candidate affidavits — criminal records, assets, and education.', icon: '🔍' },
+            { title: 'Voter Helpline App', url: 'https://play.google.com/store/apps/details?id=com.eci.citizen', desc: 'Official ECI app for voter services on Google Play.', icon: '📱' },
           ].map((r) => (
-            <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer" className="card card-interactive" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer" className="widget" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+              <span style={{ fontSize: '1.8rem', display: 'block', marginBottom: 'var(--space-3)' }}>{r.icon}</span>
               <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-2)' }}>{r.title}</h3>
               <p style={{ fontSize: 'var(--text-sm)', margin: 0 }}>{r.desc}</p>
             </a>
@@ -42,6 +40,6 @@ export default function LearnPage() {
       </section>
 
       <ChatPanel />
-    </div>
+    </>
   );
 }

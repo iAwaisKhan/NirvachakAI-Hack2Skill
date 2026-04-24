@@ -4,25 +4,14 @@ import './globals.css';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
-import { Header } from '@/components/layout/Header';
+import { Sidebar } from '@/components/layout/Sidebar';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
-const notoSans = Noto_Sans({
-  subsets: ['latin', 'devanagari'],
-  display: 'swap',
-  variable: '--font-noto',
-  weight: ['400', '500', '600', '700'],
-});
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
+const notoSans = Noto_Sans({ subsets: ['latin', 'devanagari'], display: 'swap', variable: '--font-noto', weight: ['400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
   title: 'NirvachakAI — Indian Election Process Assistant',
-  description: 'Interactive AI assistant for understanding the Indian election process, timelines, and steps.',
-  keywords: ['Indian elections', 'election process', 'voter education', 'ECI', 'democracy'],
+  description: 'Interactive AI-powered dashboard for understanding the Indian election process, timelines, and steps.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,8 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <AuthProvider>
             <LanguageProvider>
-              <Header />
-              <main id="main-content" role="main">{children}</main>
+              <div className="dashboard-layout">
+                <Sidebar />
+                <main id="main-content" className="dashboard-main" role="main">
+                  {children}
+                </main>
+              </div>
             </LanguageProvider>
           </AuthProvider>
         </ThemeProvider>

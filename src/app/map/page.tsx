@@ -9,17 +9,14 @@ export const metadata: Metadata = {
 
 export default function MapPage() {
   return (
-    <div className="container" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-16)' }}>
-      <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
-        <h1 style={{ marginBottom: 'var(--space-3)' }}>
-          🗺️ Constituency Map
-        </h1>
-        <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: 'var(--text-lg)' }}>
-          Explore India&apos;s 543 Lok Sabha constituencies. Click on state markers for seat counts and polling phases.
-        </p>
+    <>
+      <div className="page-header">
+        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Map</span></div>
+        <h1>🗺️ Constituency Map</h1>
+        <p>Explore India&apos;s 543 Lok Sabha constituencies. Click on markers for seat counts and polling phases.</p>
       </div>
       <ConstituencyMap />
       <ChatPanel />
-    </div>
+    </>
   );
 }
