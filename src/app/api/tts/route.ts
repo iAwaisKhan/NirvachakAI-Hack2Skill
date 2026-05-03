@@ -57,8 +57,7 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
     return NextResponse.json({ audioContent: data.audioContent });
-  } catch (error) {
-    console.error('TTS API error:', error);
+  } catch {
     return NextResponse.json({ error: 'Text-to-speech failed' }, { status: 500 });
   }
 }
