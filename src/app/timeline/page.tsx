@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ElectionTimeline } from '@/components/timeline/ElectionTimeline';
 import { ChatPanel } from '@/components/chat/ChatPanel';
@@ -11,7 +12,7 @@ export default function TimelinePage() {
   return (
     <>
       <div className="page-header">
-        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Timeline</span></div>
+        <div className="page-breadcrumb"><Link href="/">🏠 Home</Link> <span>/</span> <span>Timeline</span></div>
         <h1>📋 Election Process Timeline</h1>
         <p>Click on any phase to explore detailed sub-steps, key facts, and audio narrations.</p>
       </div>

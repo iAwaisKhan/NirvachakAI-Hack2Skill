@@ -13,10 +13,7 @@
   text-decoration: none; color: inherit;
   transition: all var(--transition-base);
 }
-[data-theme="dark"] .action {
-  border-color: rgba(255, 255, 255, 0.05);
-  background: rgba(255, 255, 255, 0.03);
-}
+
 .action:hover {
   border-color: rgba(249, 115, 22, 0.4);
   background: var(--bg-elevated);

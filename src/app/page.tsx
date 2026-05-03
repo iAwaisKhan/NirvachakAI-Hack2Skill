@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ELECTION_PHASES, ELECTION_FACTS } from '@/data/electionSteps';
+
 import { ChatPanel } from '@/components/chat/ChatPanel';
 import { VoterReadinessWidget } from '@/components/dashboard/VoterReadinessWidget';
 import { ElectionCountdown } from '@/components/dashboard/ElectionCountdown';

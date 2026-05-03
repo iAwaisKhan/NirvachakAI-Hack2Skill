@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { VoterReadinessPage } from '@/components/voter/VoterReadinessPage';
 import { ChatPanel } from '@/components/chat/ChatPanel';
@@ -11,7 +12,7 @@ export default function VoterCheckPage() {
   return (
     <>
       <div className="page-header">
-        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Voter Readiness</span></div>
+        <div className="page-breadcrumb"><Link href="/">🏠 Home</Link> <span>/</span> <span>Voter Readiness</span></div>
         <h1>✅ Voter Readiness Check</h1>
         <p>Smart step-by-step wizard to check your eligibility and readiness to vote.</p>
       </div>

@@ -7,10 +7,7 @@
   background: var(--saffron-50);
   color: var(--saffron-700);
 }
-[data-theme="dark"] .playing {
-  background: rgba(249, 115, 22, 0.1);
-  color: var(--saffron-300);
-}
+
 
 .spinner {
   display: inline-block;

@@ -58,13 +58,13 @@ const STEPS: Step[] = [
 
 export function VoterReadinessPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+
   const [blocker, setBlocker] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
 
   const handleAnswer = useCallback((value: string, nextAction?: string) => {
-    const step = STEPS[currentStep];
-    setAnswers((prev) => ({ ...prev, [step.id]: value }));
+
+
 
     if (nextAction && value !== 'yes' && value !== 'nri') {
       setBlocker(nextAction);
@@ -81,12 +81,12 @@ export function VoterReadinessPage() {
 
   const restart = () => {
     setCurrentStep(0);
-    setAnswers({});
+
     setBlocker(null);
     setIsComplete(false);
   };
 
-  const readyCount = Object.values(answers).filter((v) => v === 'yes' || v === 'nri').length;
+
 
   if (isComplete) {
     return (

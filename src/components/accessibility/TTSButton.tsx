@@ -9,6 +9,18 @@ interface TTSButtonProps {
   label?: string;
 }
 
+const speakWithBrowserTTS = (text: string, languageCode: string, setIsPlaying: (val: boolean) => void) => {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text.slice(0, 500));
+    utterance.lang = languageCode === 'en' ? 'en-IN' : `${languageCode}-IN`;
+    utterance.rate = 0.9;
+    utterance.onend = () => setIsPlaying(false);
+    window.speechSynthesis.speak(utterance);
+    setIsPlaying(true);
+  }
+};
+
 export function TTSButton({ text, label = 'Listen' }: TTSButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,30 +57,20 @@ export function TTSButton({ text, label = 'Listen' }: TTSButtonProps) {
           setIsPlaying(true);
         } catch (audioError) {
           console.error("Audio playback failed:", audioError);
-          useBrowserTTS(text);
+          speakWithBrowserTTS(text, language.code, setIsPlaying);
         }
       } else {
-        useBrowserTTS(text);
+        speakWithBrowserTTS(text, language.code, setIsPlaying);
       }
     } catch (error) {
       console.error("TTS fetch error:", error);
-      useBrowserTTS(text);
+      speakWithBrowserTTS(text, language.code, setIsPlaying);
     } finally {
       setIsLoading(false);
     }
   }, [isPlaying, text, language.code]);
 
-  const useBrowserTTS = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text.slice(0, 500));
-      utterance.lang = language.code === 'en' ? 'en-IN' : `${language.code}-IN`;
-      utterance.rate = 0.9;
-      utterance.onend = () => setIsPlaying(false);
-      window.speechSynthesis.speak(utterance);
-      setIsPlaying(true);
-    }
-  };
+
 
   return (
     <button

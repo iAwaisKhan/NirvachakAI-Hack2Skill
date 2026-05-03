@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useTheme } from '@/contexts/ThemeContext';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import styles from './Sidebar.module.css';
 
@@ -16,23 +17,21 @@ const NAV_ITEMS = [
 ];
 
 export function Sidebar() {
-  const { theme, toggleTheme } = useTheme();
+
   const [collapsed, setCollapsed] = useState(false);
 
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const currentPath = usePathname() || '/';
 
   return (
     <>
       {/* Mobile top bar */}
       <div className={styles.mobileBar}>
-        <a href="/" className={styles.mobileLogo}>
+        <Link href="/" className={styles.mobileLogo}>
           <span>🗳️</span> Nirvachak<span className={styles.accent}>AI</span>
-        </a>
+        </Link>
         <div className={styles.mobileActions}>
           <LanguageSwitcher />
-          <button className={styles.themeBtn} onClick={toggleTheme} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
+
         </div>
       </div>
 
@@ -40,7 +39,7 @@ export function Sidebar() {
       <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''}`} role="navigation" aria-label="Main navigation">
         {/* Logo */}
         <div className={styles.logoSection}>
-          <a href="/" className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             <div className={styles.logoIcon}>🗳️</div>
             {!collapsed && (
               <div className={styles.logoText}>
@@ -48,7 +47,7 @@ export function Sidebar() {
                 <span className={styles.logoSub}>Election Assistant</span>
               </div>
             )}
-          </a>
+          </Link>
           <button className={styles.collapseBtn} onClick={() => setCollapsed(!collapsed)} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
             {collapsed ? '→' : '←'}
           </button>
@@ -57,7 +56,7 @@ export function Sidebar() {
         {/* Nav */}
         <nav className={styles.nav}>
           {NAV_ITEMS.map((item) => (
-            <a
+            <Link
               key={item.id}
               href={item.href}
               className={`${styles.navItem} ${currentPath === item.href ? styles.active : ''}`}
@@ -65,17 +64,14 @@ export function Sidebar() {
             >
               <span className={styles.navIcon}>{item.icon}</span>
               {!collapsed && <span className={styles.navLabel}>{item.label}</span>}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Bottom section */}
         <div className={styles.bottomSection}>
           <div className={styles.controls}>
-            <button className={styles.controlBtn} onClick={toggleTheme} aria-label="Toggle theme">
-              {theme === 'light' ? '🌙' : '☀️'}
-              {!collapsed && <span>Dark Mode</span>}
-            </button>
+
             {!collapsed && <LanguageSwitcher />}
           </div>
         </div>

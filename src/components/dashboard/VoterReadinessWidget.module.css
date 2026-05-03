@@ -12,7 +12,7 @@
   font-size: var(--text-sm);
 }
 .checkItem:hover { background: rgba(255, 255, 255, 0.2); }
-[data-theme="dark"] .checkItem:hover { background: rgba(0, 0, 0, 0.2); }
+
 .checked { text-decoration: line-through; color: var(--text-tertiary); }
 .checkbox {
   width: 20px; height: 20px; flex-shrink: 0;
@@ -39,5 +39,5 @@
   text-align: center;
   animation: fadeIn 0.3s ease-out;
 }
-[data-theme="dark"] .readyBanner { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2); color: var(--green-300); }
+
 .hint { font-size: var(--text-xs); color: var(--text-tertiary); margin: var(--space-3) 0 0; text-align: center; }

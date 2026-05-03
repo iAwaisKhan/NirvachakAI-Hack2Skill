@@ -16,10 +16,7 @@
   min-width: 80px; flex-shrink: 0;
   backdrop-filter: blur(8px);
 }
-[data-theme="dark"] .tab {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.05);
-}
+
 .tab:hover { border-color: var(--tab-color, var(--border-hover)); }
 .activeTab {
   border-color: var(--tab-color, var(--color-primary));
@@ -37,10 +34,7 @@
   padding: var(--space-5);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-[data-theme="dark"] .detailCard {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.05);
-}
+
 .detailHeader { 
   display: flex; 
   align-items: flex-start; 
@@ -86,4 +80,4 @@
   border-radius: var(--radius-md);
   font-weight: 500;
 }
-[data-theme="dark"] .keyFact { background: rgba(249, 115, 22, 0.15); color: var(--saffron-300); }
+

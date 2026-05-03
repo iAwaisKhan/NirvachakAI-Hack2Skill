@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ConstituencyMap } from '@/components/map/ConstituencyMap';
 import { ChatPanel } from '@/components/chat/ChatPanel';
@@ -11,7 +12,7 @@ export default function MapPage() {
   return (
     <>
       <div className="page-header">
-        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Map</span></div>
+        <div className="page-breadcrumb"><Link href="/">🏠 Home</Link> <span>/</span> <span>Map</span></div>
         <h1>🗺️ Constituency Map</h1>
         <p>Explore India&apos;s 543 Lok Sabha constituencies. Click on markers for seat counts and polling phases.</p>
       </div>

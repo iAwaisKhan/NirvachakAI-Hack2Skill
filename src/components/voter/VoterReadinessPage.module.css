@@ -34,14 +34,14 @@
   cursor: pointer; transition: all var(--transition-fast); color: var(--text-primary);
 }
 .option:hover { border-color: var(--saffron-400); background: var(--saffron-50); transform: translateY(-1px); }
-[data-theme="dark"] .option:hover { background: rgba(249, 115, 22, 0.08); }
+
 
 .blockerAlert {
   margin-top: var(--space-6); padding: var(--space-5); text-align: left;
   background: #fef3c7; border: 1px solid #fcd34d; border-radius: var(--radius-xl);
   animation: fadeIn 0.3s ease-out;
 }
-[data-theme="dark"] .blockerAlert { background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.3); }
+
 .blockerAlert strong { display: block; margin-bottom: var(--space-2); }
 .blockerAlert p { font-size: var(--text-sm); margin: 0 0 var(--space-4); }
 .blockerActions { display: flex; gap: var(--space-3); }

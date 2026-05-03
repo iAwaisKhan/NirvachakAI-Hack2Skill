@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import styles from './VideoCarousel.module.css';
 
 interface Video {
@@ -75,7 +76,7 @@ export function VideoCarousel() {
               >
                 <div className={styles.thumbnail}>
                   {video.thumbnailUrl ? (
-                    <img src={video.thumbnailUrl} alt={video.title} loading="lazy" />
+                    <Image src={video.thumbnailUrl} alt={video.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className={styles.image} />
                   ) : (
                     <div className={styles.placeholderThumb}>🎬</div>
                   )}

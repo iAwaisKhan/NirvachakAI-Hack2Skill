@@ -175,10 +175,7 @@
   color: var(--saffron-700);
   line-height: var(--leading-relaxed);
 }
-[data-theme="dark"] .keyFact {
-  background: rgba(249, 115, 22, 0.08);
-  color: var(--saffron-300);
-}
+
 .factIcon { flex-shrink: 0; }
 
 .phaseActions {

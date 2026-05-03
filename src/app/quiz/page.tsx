@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { ChatPanel } from '@/components/chat/ChatPanel';
@@ -11,7 +12,7 @@ export default function QuizPage() {
   return (
     <>
       <div className="page-header">
-        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Quiz</span></div>
+        <div className="page-breadcrumb"><Link href="/">🏠 Home</Link> <span>/</span> <span>Quiz</span></div>
         <h1>🧠 Election Knowledge Quiz</h1>
         <p>AI-generated questions powered by Google Gemini. Every quiz is unique!</p>
       </div>

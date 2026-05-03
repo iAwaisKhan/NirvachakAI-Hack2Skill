@@ -5,12 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/sanitize';
 
-const TRUSTED_CHANNELS = [
-  'Election Commission of India',
-  'ECI India',
-  'Rajya Sabha TV',
-  'Lok Sabha TV',
-];
+
 
 export interface YouTubeVideo {
   id: string;

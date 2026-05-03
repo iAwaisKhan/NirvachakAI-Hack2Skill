@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { VideoCarousel } from '@/components/media/VideoCarousel';
 import { ChatPanel } from '@/components/chat/ChatPanel';
@@ -11,7 +12,7 @@ export default function LearnPage() {
   return (
     <>
       <div className="page-header">
-        <div className="page-breadcrumb"><a href="/">🏠 Home</a> <span>/</span> <span>Learn</span></div>
+        <div className="page-breadcrumb"><Link href="/">🏠 Home</Link> <span>/</span> <span>Learn</span></div>
         <h1>🎬 Learn About Elections</h1>
         <p>Curated educational videos and trusted resources via YouTube Data API.</p>
       </div>

@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import styles from './ElectionCountdown.module.css';
 
+const targetDate = new Date('2029-05-01T00:00:00+05:30'); // Next general election
+
 export function ElectionCountdown() {
-  const targetDate = new Date('2029-05-01T00:00:00+05:30'); // Next general election
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {

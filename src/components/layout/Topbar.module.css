@@ -12,10 +12,7 @@
   -webkit-backdrop-filter: blur(25px) saturate(180%);
   transition: all var(--transition-base);
 }
-[data-theme="dark"] .topbar {
-  background: rgba(15, 23, 42, 0.4);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
-}
+
 
 .inner {
   max-width: var(--container-xl);
@@ -103,18 +100,13 @@
   color: var(--text-primary);
   background: rgba(0, 0, 0, 0.03);
 }
-[data-theme="dark"] .navLink:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
+
 .navLink.active {
   color: var(--saffron-600);
   background: rgba(249, 115, 22, 0.06);
   font-weight: 600;
 }
-[data-theme="dark"] .navLink.active {
-  color: var(--saffron-400);
-  background: rgba(249, 115, 22, 0.12);
-}
+
 
 .navLabel {
   letter-spacing: 0.02em;

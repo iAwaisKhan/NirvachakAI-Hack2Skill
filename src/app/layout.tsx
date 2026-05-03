@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/contexts/ThemeContext';
+
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Topbar } from '@/components/layout/Topbar';
 import { Footer } from '@/components/layout/Footer';
@@ -52,34 +52,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoSans.variable}`} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const stored = localStorage.getItem('nirvachak-theme');
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const theme = stored || (prefersDark ? 'dark' : 'light');
-                  document.documentElement.setAttribute('data-theme', theme);
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className={`${inter.variable} ${notoSans.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">Skip to main content</a>
-        <ThemeProvider>
-          <LanguageProvider>
-            <Topbar />
-            <main id="main-content" className="dashboard-main" role="main">
-              {children}
-            </main>
-            <Footer />
-          </LanguageProvider>
-        </ThemeProvider>
+        <LanguageProvider>
+          <Topbar />
+          <main id="main-content" className="dashboard-main" role="main">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );
